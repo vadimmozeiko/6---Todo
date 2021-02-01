@@ -23,7 +23,7 @@ doToday.print()
 doToday.list()
 
 doToday.changeStatus(1, true)
-doToday.changeStatus(0, true)
+doToday.changeStatus(2, true)
 
 doToday.print()
 

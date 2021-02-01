@@ -1,78 +1,80 @@
-class Todo {
-    constructor (name) {
-        this.name = name;
+class Todo {                                         // inicijuojame objekta
+    constructor (name) {                            // constructor priimta viena objekta su parametru (name)
+        this.name = name;                          // inicijuojame globalius kintamuosius
         this.tasks = [];
     }
 
-    list() {
-        const tasks = `You have ${this.tasks.length} tasks left for today`;
-        console.log(tasks);
+    list() {                                     // objekto funkcija kuri atlieka saraso isspaudinima
+        const tasks = `You have ${this.tasks.length} tasks left for today`; // inicijuojame kintamaji ir nurodome norimus parametrus (siuo atveju tekstas)
+        console.log(tasks);                     // isspausdiname tasks nurodyta teksta i console
     }
 
-    add(text) {
-        this.tasks.push({
-            text: text,
-            completed: false});
-            console.log(`New task was added successfully`)
+    add(text) {                                 // objekto funkcija kuri atlieka pridejimo funkcija su vienu parametru text
+        this.tasks.push({                       // nurodome, kad i kintamaji this.tasks=[] pridedame siuos irasus
+            text: text,                         // kintamasis text bus lygus objekto funkcijos nurodytam parametrui add(text)
+            completed: false});                 // pagal nutylejima visi irasai objekte tures papildoma kategorija su false reiksme
+            console.log(`New task was added successfully`)      // po inicijavimo isspausdiname tinkama zinute
 
     }
 
-    edit(index, text){
-        if (index < 0 || index > this.tasks.length){
-            console.error ('ERROR: Task was not found')
+    edit(index, text){                          // objekto funkcija kuri atlieka redagavimo funkcija su dviem parametrais index(kuri irasa keisti) text(naujas iraso tekstas)
+        if (index < 0 || index > this.tasks.length){    // tikriname, jeigu nurodytas iraso index nurodytas neteisingai (tokio nera)
+            console.error ('ERROR: Task was not found') // ismeta klaida
         }
-        this.tasks[index] = text;
+        this.tasks[index] = text;                       // jeigu klaidu nera, objekte su nurodytu index tekstas bus pakeistas nauju tekstu
     }
 
-    remove(index) {
-        if (index < 0 || index > this.tasks.length){
-            console.error ('ERROR: Task was not found')
+    remove(index) {                             // objekto funkcija kuri atlieka salinimo funkcija su vienu parametri index(kuri irasa trinti) 
+        if (index < 0 || index > this.tasks.length){  // tikriname, jeigu nurodytas iraso index nurodytas neteisingai (tokio nera)
+            console.error ('ERROR: Task was not found') // ismeta klaida
         } else {
-            console.log(`Task no. ${index} was removed successfully`)
+            console.log(`Task no. ${index} was removed successfully`) // jeigu klaidu nera, po inicijavimo isspausdiname tinkama zinute
         }
-        const newList = [];
-        for (let i = 0; i < this.tasks.length; i++){
-            if (i !== index){
-                newList.push(this.tasks[i]);
+        const newList = [];                                         // inicijuojame kintamaji kuriame saugosime nauja sarasa be nurodyto(kuri norime pasalinti)
+        for (let i = 0; i < this.tasks.length; i++){                // inicijuojame cikla
+            if (i !== index){                                       // tikriname kuris nurodytas saraso elementas (index) nesutampa su i, pvz, i = 0 index = 2, i = 1 index = 2 
+                newList.push(this.tasks[i]);                        // visus kurie nesutampa irasome i nauja kintamaji
             }
         }
-        this.tasks = newList;
+        this.tasks = newList;                                       // po ciklo visi saraso elememtai isskyrus nurodyta (index) grazinami i tasks=[]
     }
 
-    print(){
-        console.table(this.tasks);
+    print(){                                                        // objekto funkcija kuri atlieka isspausdinimo fukkcija 
+        console.table(this.tasks);                                  // nurodome, kad norime matyti rezultata kaip lentele console
     }
 
-    changeStatus(index, status){
-        if (index < 0 || index > this.tasks.length){
-            console.error ('ERROR: Task was not found')
+    changeStatus(index, status){                                    // objekto funkcija su dviem kintamaisiais, skirta keisti completed statusa 
+        if (index < 0 || index > this.tasks.length){                // tikriname, jeigu nurodytas iraso index nurodytas teisingai (tokio nera)
+            console.error ('ERROR: Task was not found')             // ismeta klaida, 
         }
-        if (typeof status !== 'boolean'){
-            console.error ('ERROR: set status true/false')
+        if (typeof status !== 'boolean'){                           // tikriname ar status nurodyta reiksme yra true/false <- boolean
+            console.error ('ERROR: set status true/false')          // jeigu ne ismeta klaida
         } else{
-           console.log(`Task no. ${index} status was changed`) 
+           console.log(`Task no. ${index} status was changed`)      // jeigu taip, po inicijavimo isspausdiname tinkama zinute
         }
-       this.tasks[index].completed = status
-       
+
+        console.log(this.tasks.length);
+        
+        this.tasks[index].completed = status                         // pakeiciame atitinkama iraso completed reiksme
             
     }
 
-    selectCompletedOnly() {
-        const completedList = []
-        for (const task of this.tasks) {
-            if (task.completed === true) {
-                completedList.push(task);
+    selectCompletedOnly() {                                         // objekto funkcija skirta atrinkti tik uzbaigtas uzduotis (completed:true)
+        const completedList = []                                    // inicijuojame sarasa kuriame saudosime completed:true rastus irasus
+        for (const task of this.tasks) {                            // inicijuojame cikla, kuris eina per sarasa this.task
+            if (task.completed === true) {                          // tikriname ar yra sarase elementu su completed:true
+                completedList.push(task);                           // jeigu taip, irasome i sarasa
             }
-        }   console.table(completedList);
+        }   console.table(completedList);                           // isspausdiname kaip lentele visus rastus elementus
     }
 
-    selectNotCompleted(){
-        const notCompletedList = []
-        for (const task of this.tasks) {
-            if (task.completed === false) {
-                notCompletedList.push(task);
+    selectNotCompleted(){                                           // objekto funkcija skirta atrinkti tik neuzbaigtas uzduotis (completed:false)
+        const notCompletedList = []                                 // inicijuojame sarasa kuriame saudosime completed:false rastus irasus
+        for (const task of this.tasks) {                            // inicijuojame cikla, kuris eina per sarasa this.task
+            if (task.completed === false) {                         // tikriname ar yra sarase elementu su completed:false
+                notCompletedList.push(task);                        // jeigu taip, irasome i sarasa
             }
-        }   console.table(notCompletedList);
+        }   console.table(notCompletedList);                        // isspausdiname kaip lentele visus rastus elementus
     }
 
 }
