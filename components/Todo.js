@@ -46,6 +46,7 @@ class Todo {                                         // inicijuojame objekta
     changeStatus(index, status){                                    // objekto funkcija su dviem kintamaisiais, skirta keisti completed statusa 
         if (index < 0 || index > this.tasks.length){                // tikriname, jeigu nurodytas iraso index nurodytas teisingai (tokio nera)
             console.error ('ERROR: Task was not found')             // ismeta klaida, 
+            return;
         }
         if (typeof status !== 'boolean'){                           // tikriname ar status nurodyta reiksme yra true/false <- boolean
             console.error ('ERROR: set status true/false')          // jeigu ne ismeta klaida
