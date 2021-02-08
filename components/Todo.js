@@ -30,6 +30,7 @@ class Todo {                                         // inicijuojame objekta
         } else {
             console.log(`Task no. ${index} was removed successfully`) // jeigu klaidu nera, po inicijavimo isspausdiname tinkama zinute
         }
+
         const newList = [];                                         // inicijuojame kintamaji kuriame saugosime nauja sarasa be nurodyto(kuri norime pasalinti)
         for (let i = 0; i < this.tasks.length; i++){                // inicijuojame cikla
             if (i !== index){                                       // tikriname kuris nurodytas saraso elementas (index) nesutampa su i, pvz, i = 0 index = 2, i = 1 index = 2 
@@ -61,21 +62,29 @@ class Todo {                                         // inicijuojame objekta
     }
 
     selectCompletedOnly() {                                         // objekto funkcija skirta atrinkti tik uzbaigtas uzduotis (completed:true)
-        const completedList = []                                    // inicijuojame sarasa kuriame saudosime completed:true rastus irasus
-        for (const task of this.tasks) {                            // inicijuojame cikla, kuris eina per sarasa this.task
-            if (task.completed === true) {                          // tikriname ar yra sarase elementu su completed:true
-                completedList.push(task);                           // jeigu taip, irasome i sarasa
-            }
-        }   console.table(completedList);                           // isspausdiname kaip lentele visus rastus elementus
+        // const completedList = []                                    // inicijuojame sarasa kuriame saudosime completed:true rastus irasus
+        // for (const task of this.tasks) {                            // inicijuojame cikla, kuris eina per sarasa this.task
+        //     if (task.completed === true) {                          // tikriname ar yra sarase elementu su completed:true
+        //         completedList.push(task);                           // jeigu taip, irasome i sarasa
+        //     }
+        // }   console.table(completedList);                           // isspausdiname kaip lentele visus rastus elementus
+
+        const completedList = this.tasks.filter(task => task.completed === true);
+        console.table(completedList);
     }
 
     selectNotCompleted(){                                           // objekto funkcija skirta atrinkti tik neuzbaigtas uzduotis (completed:false)
-        const notCompletedList = []                                 // inicijuojame sarasa kuriame saudosime completed:false rastus irasus
-        for (const task of this.tasks) {                            // inicijuojame cikla, kuris eina per sarasa this.task
-            if (task.completed === false) {                         // tikriname ar yra sarase elementu su completed:false
-                notCompletedList.push(task);                        // jeigu taip, irasome i sarasa
-            }
-        }   console.table(notCompletedList);                        // isspausdiname kaip lentele visus rastus elementus
+    //     const notCompletedList = []                                 // inicijuojame sarasa kuriame saudosime completed:false rastus irasus
+    //     for (const task of this.tasks) {                            // inicijuojame cikla, kuris eina per sarasa this.task
+    //         if (task.completed === false) {                         // tikriname ar yra sarase elementu su completed:false
+    //             notCompletedList.push(task);                        // jeigu taip, irasome i sarasa
+    //         }
+    //     }   console.table(notCompletedList);                        // isspausdiname kaip lentele visus rastus elementus
+    // }
+
+    const notCompletedList = this.tasks.filter(task => task.completed === false);
+    console.table(notCompletedList);
+
     }
 
 }
